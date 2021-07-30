@@ -1,3 +1,5 @@
+window.onload = init;
+
 var canvas = document.getElementById("canvas")
 var ctx = canvas.getContext('2d');
 
@@ -59,6 +61,9 @@ var portsCount = [0, 0, 0, 0, 0];
 var dices = [-1, -1];
 
 function init () {
+
+	document.addEventListener("click", checkClick);
+
 	for (var i = 0; i < 19; i++)
 	{
 		var rand = Math.floor(Math.random() * 6);
@@ -95,6 +100,8 @@ function init () {
 		ports.push(rand);
 		portsCount[rand]++;
 	}
+	dropDices();
+	draw();
 }
 
 function dropDices () {
@@ -103,6 +110,23 @@ function dropDices () {
 	var sum = rand1 + rand2 + 2;
 	dices[0] = rand1;
 	dices[1] = rand2;
+}
+
+function checkClick (e) {
+
+	if(e.pageX - canvas.offsetLeft >=  gameWidth / 10 * 8 - 10 &&
+	 	e.pageX - canvas.offsetLeft <= gameWidth &&
+		e.pageY - canvas.offsetTop >= gameHeight / 10 * 9 - 5 &&
+		e.pageY - canvas.offsetTop <= gameHeight)
+		dropDices();
+		drawDice();
+}
+
+function draw() {
+	ctx.drawImage(background, 0, 0, gameWidth, gameHeight);
+	drawHexes();
+	drawPorts();
+	drawDice();
 }
 
 function drawHexes () {
@@ -165,15 +189,6 @@ function drawPorts () {
 }
 
 function drawDice () {
-	dropDices();
 	ctx.drawImage(dicesImgs[dices[0]], gameWidth / 10 * 8 - 10, gameHeight / 10 * 9 - 5, gameWidth / 10, gameHeight / 10);
 	ctx.drawImage(dicesImgs[dices[1]], gameWidth / 10 * 9 - 5, gameHeight / 10 * 9 - 5, gameWidth / 10, gameHeight / 10);
-}
-
-background.onload = function () {
-	ctx.drawImage(background, 0, 0, gameWidth, gameHeight);
-	init();
-	drawHexes();
-	drawPorts();
-	drawDice();
 }

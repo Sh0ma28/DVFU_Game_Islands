@@ -2,9 +2,10 @@ var player;
 var startR = 50;
 var zoom = 1;
 var snake;
-var blobs = []
+var blobs = [];
 
-function setup () {
+function setup () 
+{
     createCanvas(window.innerWidth - 10, window.innerHeight - 20); // чтобы не создавались ползунки
     player = new Blob(0, 0, startR, false);
     snake = new Snake(player);
@@ -12,7 +13,8 @@ function setup () {
         blobs[i] = new Blob(random(-width,width), random(-height,height), 10, false);
 }
 
-function draw () {
+function draw ()
+{
     background(128, 128, 128);
     translate(width / 2, height / 2); // перемещает камеру в центр
     var newzoom = startR / player.r; 
@@ -20,7 +22,7 @@ function draw () {
     scale(zoom);
 
     translate(-player.pos.x , -player.pos.y);
-    for (var x= -width; x < width; x += 150)
+    for (var x= -width; x < width; x += 150) // сетка на фоне
     {
         for (var y= -height; y < height; y += 150)
         {
@@ -28,18 +30,20 @@ function draw () {
             line(x, y, x, height);
         }
     }
+
     snake.show();
     player.show();
-    player.update(mouseX - width/2, mouseY - height/2, 3);
+    player.update(mouseX - width / 2, mouseY - height / 2, 3);
     snake.head = player;
     snake.update();
+    
     for (var i = blobs.length - 1; i >= 0; i--)
     {
         if (player.eating(blobs[i]))
         {
             blobs.splice(i, 1);
-            blobs.push(new Blob(random(-width, width), random(-height, height), 10)); // Спавн новой еды
+            blobs.push(new Blob(random(-width, width), random(-height, height), 10, false)); // спавн новой еды
         }
-        if (blobs[i] != undefined) blobs[i].show();
+        if (blobs[i] != undefined) blobs[i].show(); // условие для непредвиденных ошибок
     } 
 }

@@ -1,11 +1,12 @@
-function Blob (x, y, r, isTail)
+function Blob (x, y, r, isTail, isAI, color)
 {
     this.pos = createVector(x,y);
     this.r = r;
     this.speed = createVector(0,0);
-    this.color = [random(255),random(255),random(255)];
+    this.color = color;
     this.mass = 0;
     this.isTail = isTail;
+    this.isAI = isAI;
 
     this.update = function (difX, difY, speed)
     {
@@ -15,13 +16,25 @@ function Blob (x, y, r, isTail)
         this.pos.add(this.speed);
     }
 
-    this.eating = function (food)
+    this.eatingBlobs = function (food)
     {
         var distance = p5.Vector.dist(this.pos, food.pos);
         if (!this.isTail && distance < this.r + food.r)
         {
-            this.r++ 
-            this.mass++;
+            this.isAI ? this.r += 3 : this.r++; 
+            this.isAI ? this.mass += 3 : this.mass++;
+            return true;
+        } 
+        return false;
+    }
+
+    this.eatingSnakes = function (other)
+    {
+        var distance = p5.Vector.dist(this.pos, other.pos);
+        if (!this.isTail && distance < this.r + other.r && this.r > other.r + 3)
+        {
+            this.r += 3
+            this.mass += other.mass;
             return true;
         } 
         return false;
@@ -53,7 +66,7 @@ function Snake (head)
     {
         if (this.head.mass / 10 > this.tailLen)
         {
-            var tailBlob = new Blob(this.head.pos.x - this.head.r * 2, this.head.pos.y - 20 - this.head.r * 2, this.head.r, true);
+            var tailBlob = new Blob(this.head.pos.x, this.head.pos.y, this.head.r - this.tailLen, true, false, this.head.color);
             this.tailBlobs[this.tailLen - 1] = tailBlob;
             this.tailLen++;
         }
@@ -69,7 +82,7 @@ function Snake (head)
             this.tailBlobs[i].update(this.tailBlobs[i-1].pos.x - this.tailBlobs[i].pos.x, this.tailBlobs[i-1].pos.y - this.tailBlobs[i].pos.y, 2.9 - i*0.1); 
 
         for (var i = 0; i < this.tailLen - 1; i++)
-            this.tailBlobs[i].r = this.head.r;
+            this.tailBlobs[i].r = this.head.r - (i + 1) * 2;
     }
 
     this.show = function ()

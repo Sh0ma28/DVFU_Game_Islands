@@ -21,8 +21,8 @@ function Blob (x, y, r, isTail, isAI, color)
         var distance = p5.Vector.dist(this.pos, food.pos);
         if (!this.isTail && distance < this.r + food.r)
         {
-            this.isAI ? this.r += 3 : this.r++; 
-            this.isAI ? this.mass += 3 : this.mass++;
+            this.isAI ? this.r += 2 : this.r += 0.5; 
+            this.mass++;
             return true;
         } 
         return false;
@@ -64,7 +64,7 @@ function Snake (head)
 
     this.grow = function ()
     {
-        if (this.head.mass / 10 > this.tailLen)
+        if ((this.head.r - startR) / 10 > this.tailLen)
         {
             var tailBlob = new Blob(this.head.pos.x, this.head.pos.y, this.head.r - this.tailLen, true, false, this.head.color);
             this.tailBlobs[this.tailLen - 1] = tailBlob;

@@ -1,5 +1,5 @@
 var player;
-var startR = 50;
+var startR = 30;
 var zoom = 1;
 var snake;
 var blobs = [];
@@ -55,7 +55,7 @@ function draw ()
 
     for (var i = 0; i < 10; i++) // обновление
     {
-        AI[i].update(blobs[i].pos.x - AI[i].pos.x, blobs[i].pos.y -AI[i].pos.y, 3.1);
+        AI[i].update(blobs[i].pos.x - AI[i].pos.x, blobs[i].pos.y -AI[i].pos.y, 3);
         snakes[i].head = AI[i];
         snakes[i].update();
     }

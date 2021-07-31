@@ -20,8 +20,7 @@ function Blob (x, y, r, isTail)
         var distance = p5.Vector.dist(this.pos, food.pos);
         if (!this.isTail && distance < this.r + food.r)
         {
-            var sum = PI * this.r * this.r + PI * food.r * food.r;  // сумма площадей
-            this.r = sqrt(sum / PI); 
+            this.r++ 
             this.mass++;
             return true;
         } 
@@ -30,10 +29,10 @@ function Blob (x, y, r, isTail)
 
     this.borders = function ()
     {
-        this.pos.x = this.pos.x < -width ? -width : this.pos.x;
-        this.pos.x = this.pos.x > width ? width : this.pos.x;
-        this.pos.y = this.pos.y < -height ? -height : this.pos.y;
-        this.pos.y = this.pos.y > height ? height : this.pos.y;
+        this.pos.x = this.pos.x < -width * 2 ? -width * 2 : this.pos.x;
+        this.pos.x = this.pos.x > width * 2 ? width * 2 : this.pos.x;
+        this.pos.y = this.pos.y < -height * 2 ? -height * 2 : this.pos.y;
+        this.pos.y = this.pos.y > height * 2 ? height * 2 : this.pos.y;
     }
 
     this.show = function()

@@ -10,7 +10,7 @@ function setup ()
     player = new Blob(0, 0, startR, false);
     snake = new Snake(player);
     for (var i = 0; i < 100; i++)
-        blobs[i] = new Blob(random(-width,width), random(-height,height), 10, false);
+        blobs[i] = new Blob(random(-width * 2, width * 2), random(-height * 2, height * 2), 10, false);
 }
 
 function draw ()
@@ -22,27 +22,22 @@ function draw ()
     scale(zoom);
 
     translate(-player.pos.x , -player.pos.y);
-    for (var x= -width; x < width; x += 150) // сетка на фоне
-    {
-        for (var y= -height; y < height; y += 150)
-        {
-            line(x, y, width, y);
-            line(x, y, x, height);
-        }
-    }
-
-    snake.show();
+    for (var y = -height * 2; y < height * 2; y += 150)
+        line(-width * 2, y, width * 2, y);
+    for (var x = -width * 2; x < width * 2; x += 150)
+            line(x, -height * 2, x, height * 2);
     player.show();
+    snake.show();
     player.update(mouseX - width / 2, mouseY - height / 2, 3);
     snake.head = player;
     snake.update();
-    
+
     for (var i = blobs.length - 1; i >= 0; i--)
     {
         if (player.eating(blobs[i]))
         {
             blobs.splice(i, 1);
-            blobs.push(new Blob(random(-width, width), random(-height, height), 10, false)); // спавн новой еды
+            blobs.push(new Blob(random(-width * 2, width * 2), random(-height * 2, height * 2), 10, false)); // спавн новой еды
         }
         if (blobs[i] != undefined) blobs[i].show(); // условие для непредвиденных ошибок
     } 

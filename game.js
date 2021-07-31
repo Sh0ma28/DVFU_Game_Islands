@@ -3,9 +3,18 @@ var startR = 50;
 var zoom = 1;
 var snake;
 var blobs = [];
+var playerName;
+var sessionCode = 0;
 
 function setup () 
 {
+    playerName = prompt("Enter your name:");
+    database.ref("count").get().then((snapshot) => {
+        if (snapshot.exists()) sessionCode = snapshot.val();
+        else sessionCode = 0;
+        database.ref("sessions/" + sessionCode + "/playerName").set(playerName); 
+        database.ref("count").set(sessionCode + 1);   
+    });
     createCanvas(window.innerWidth - 10, window.innerHeight - 20); // чтобы не создавались ползунки
     player = new Blob(0, 0, startR, false);
     snake = new Snake(player);

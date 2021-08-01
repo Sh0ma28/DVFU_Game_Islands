@@ -67,7 +67,7 @@ function Snake (head)
         if ((this.head.r - startR) / 10 > this.tailLen)
         {
             var tailBlob = new Blob(this.head.pos.x, this.head.pos.y, this.head.r - this.tailLen, true, false, this.head.color);
-            this.tailBlobs[this.tailLen - 1] = tailBlob;
+            this.tailBlobs.push(tailBlob);
             this.tailLen++;
         }
     }

@@ -11,7 +11,7 @@ function Blob (x, y, r, isTail, isAI, color)
     this.update = function (difX, difY, speed)
     {
         var newSpeed = createVector(difX, difY);
-        newSpeed .setMag(speed); 
+        newSpeed .setMag(speed);
         this.speed.lerp(newSpeed, 1); // cкорость поворота
         this.pos.add(this.speed);
     }
@@ -21,8 +21,8 @@ function Blob (x, y, r, isTail, isAI, color)
         var distance = p5.Vector.dist(this.pos, food.pos);
         if (!this.isTail && distance < this.r + food.r)
         {
-            this.isAI ? this.r += 2 : this.r += 0.5; 
-            this.mass++;
+            this.isAI ? this.r += 2 : this.r += 0.5;
+            food.r >= 17 ? this.mass += 2 : this.mass += 1
             return true;
         } 
         return false;
@@ -79,7 +79,7 @@ function Snake (head)
             this.tailBlobs[0].update(this.head.pos.x - this.tailBlobs[0].pos.x, this.head.pos.y - this.tailBlobs[0].pos.y, 2.9);
 
         for (var i = 1; i < this.tailLen - 1; i++)
-            this.tailBlobs[i].update(this.tailBlobs[i-1].pos.x - this.tailBlobs[i].pos.x, this.tailBlobs[i-1].pos.y - this.tailBlobs[i].pos.y, 2.9 - i*0.1); 
+            this.tailBlobs[i].update(this.tailBlobs[i-1].pos.x - this.tailBlobs[i].pos.x, this.tailBlobs[i-1].pos.y - this.tailBlobs[i].pos.y, 2.9 - i * 0.1);
 
         for (var i = 0; i < this.tailLen - 1; i++)
             this.tailBlobs[i].r = this.head.r - (i + 1) * 2;

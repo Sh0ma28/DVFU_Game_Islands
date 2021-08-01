@@ -1,0 +1,74 @@
+body{
+  background-image: url('slither.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.container {
+  background-color: #000000be;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 20px;
+  width: 320px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: calc(50vh - 200px);
+}
+  
+.title {
+  font-family: sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+}
+  
+.input-box {
+  height: 50px;
+  position: relative;
+  width: 100%;
+  margin-top: 40px;
+}
+  
+.input {
+  background-color: #303245;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  font-size: 18px;
+  height: 100%;
+  outline: 0;
+  padding: 4px 20px 0;
+  width: 100%;
+}
+  
+.placeholder {
+  color: #65657b;
+  font-family: sans-serif;
+  left: 20px;
+  line-height: 14px;
+  pointer-events: none;
+  position: absolute;
+  transform-origin: 0 50%;
+  transition: transform 200ms, color 200ms;
+  top: 20px;
+}
+  
+.submit {
+  background-color: Green;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: white ;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  margin-top: 38px;
+  text-align: center;
+  width: 100%;
+}
+  
+.submit:active {
+  background-color: Green;
+}

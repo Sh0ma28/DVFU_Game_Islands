@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>SnakeLand</title>
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+    <div class="progress">
+        <h2 id="mass">
+            Score: 0
+        </h2>
+        <h2 id="time">
+            Time:
+        </h2>
+    </div>
+    <div class="best_players">
+        <h2>Best Players</h2>
+        <h3 class="player_score" id="1st"></h3>
+        <h3 class="player_score" id="2nd"></h3>
+        <h3 class="player_score" id="3rd"></h3>
+        <h3 class="player_score" id="4th"></h3>
+        <h3 class="player_score" id="5th"></h3>
+        <h4 class="player_score" id="code"></h4>
+    </div>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+
+	<script>
+	  // Your web app's Firebase configuration
+	  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyC0dYec6lAI528dtqQ2QZX-18VobUIKTTo",
+	    authDomain: "dvfu-snakeland.firebaseapp.com",
+	    databaseURL: "https://dvfu-snakeland-default-rtdb.asia-southeast1.firebasedatabase.app",
+	    projectId: "dvfu-snakeland",
+	    storageBucket: "dvfu-snakeland.appspot.com",
+	    messagingSenderId: "643764282042",
+	    appId: "1:643764282042:web:14ca2589c33af8601a1883",
+	    measurementId: "G-4Z54NH9LJF"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	  var database = firebase.database();
+	</script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.min.js"></script>
+    <script src="game.js"></script>
+    <script src="classes.js"></script>
+</body>
+</html>
